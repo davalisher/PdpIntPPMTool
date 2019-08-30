@@ -6,10 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uz.pdp.ppmtool.domain.Project;
 import uz.pdp.ppmtool.service.MapValidationErrorService;
 import uz.pdp.ppmtool.service.ProjectService;
@@ -36,5 +33,10 @@ public class ProjectController {
         }
         Project project1 = projectService.saveOrUpdateProject(project);
         return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
+    }
+    @GetMapping("/{projectId}")
+    public ResponseEntity<?>getProjectById(@PathVariable String projectId){
+        Project project =projectService.getProjectByProjectId(projectId);
+        return new ResponseEntity<Project>(project,HttpStatus.OK);
     }
 }
